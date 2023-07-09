@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Prediction Results</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/res.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h4 style="position: fixed; top:0; right:0 !important; margin: 2%">
+
+        Hi {{name}}
+     
+         </h4>
+      <h1>Prediction Results</h1>
+      <div id="result-container" class="result">
+        {% if results %}
+          <p class="success">Predicted Class: {{ results[0] }}</p>
+
+        {% else %}
+          <p class="error">There was an error with your request. Please try again.</p>
+        {% endif %}
+      </div>
+      <div class="plan-container">
+        <h2>Plan</h2>
+        <p>{{ plan | safe }}</p>
+      </div>
+      <br>
+      <button class="btn" onclick="location.href='/'">Go Back</button>
+    </div>
+    <br>
+    <div style="margin: 0% 40%">
+      <button utton id="send-email" class="btn btn-success btn-lg btn-primary btn-block">Send Results via Email</button>
+    </div>
+    <div style="margin: 0% 30%; margin-top:10%">
+        <a href="{{url_for('logout')}}"><button class="btn btn-lg btn-primary btn-block">Logout</button></a>
+    </div>
+  
+    <script>
+      $(document).ready(function() {
+        $("#send-email").click(function() {
+          const fitnessPlan = "{{ plan|safe }}";
+          const formData = JSON.parse('{{ data|tojson|safe }}');
+          
+          // Convert form data to a string representation
+          const formDataString = Object.entries(formData)
+            .map(([key, value]) => `${key}: ${value}`)
+            .join('\n');
+
+          $.ajax({
+            url: "{{ url_for('send_fitness_email') }}",
+            method: "POST",
+            data: { 
+                fitness_plan: fitnessPlan,
+                form_data: formDataString
+            },
+            success: function(response) {
+              if (response.success) {
+                alert(response.message);
+              } else {
+                alert("Error sending email.");
+              }
+            },
+            error: function() {
+              alert("Error sending email.");
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

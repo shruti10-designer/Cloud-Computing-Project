@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loading.css') }}">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+            jQuery('#loading').fadeOut(1000);
+        });
+        </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+
+<body>
+
+    <style>
+        /* Adjust the dimensions and position of the video player */
+        video {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: -1;
+        }
+      </style>
+      
+      <video autoplay muted loop>
+        <source src="https://storage.googleapis.com/cloud-fitness-genie/video2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <h4 style="position: fixed; top:0; right:0 !important; margin: 2%">
+
+        Hi {{name}}
+     
+         </h4>
+    <div id="loading"></div>
+    <div id="contents">
+        <h1>Health Prediction</h1>
+       
+        <form id="health-form" action="{{ url_for('res') }}" onsubmit="return validateForm()">
+            <div class="input-box">
+              <div class="input-container">
+                <input type="number" name="step_count" placeholder="Step count" required>
+              </div>
+            </div>
+            <div class="input-box">
+              <div class="input-container">
+                <input type="number" name="calories_burnt" placeholder="Calories burnt" required>
+              </div>
+            </div>
+            <div class="input-box">
+              <div class="input-container">
+                <input type="number" name="hours_of_sleep" placeholder="Hours of sleep" required>
+              </div>
+            </div>
+            <div class="input-box">
+              <div class="input-container">
+                <input type="number" name="Weight" placeholder="Weight (in kg)" step="0.01" required>
+              </div>
+            </div>
+            <div class="input-box">
+              <div class="input-container">
+                <input type="number" name="Height" placeholder="Height (in cm)" step="0.01" required>
+              </div>
+            </div>
+            <div class="input-box">
+              <div class="input-container">
+                <input type="number" name="calories" placeholder="Calories" required>
+              </div>
+            </div>
+            <button class="custom-btn neon-btn" type="submit"><span>Submit</span></button>
+          </form>
+       
+    </div>
+    <br>
+    <div style="margin: 0% 30%">
+        <a href="{{url_for('logout')}}"><button class="btn btn-lg btn-primary btn-block">Logout</button></a>
+    </div>
+</body>
+</html>

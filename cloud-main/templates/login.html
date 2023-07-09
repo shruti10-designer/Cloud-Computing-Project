@@ -1,0 +1,35 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='css/signin.css')}}">
+{% endblock %}
+
+{% block content %}
+    <!-- if statement in jinja to check if msg variable is passed from frontend, if so display it: -->
+    {% if msg is defined %}
+        <h1>{{ msg }}</h1>
+    {% endif %}
+
+    <div class="container">
+
+      <form class="form-signin" method="POST" action="/login">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.username) }}
+        {{ wtf.form_field(form.password) }}
+        {{ wtf.form_field(form.remember) }}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+    <div style="margin: 0% 30%">
+        <a href="{{url_for('signup')}}"><button class="btn btn-lg btn-primary btn-block">Click here to Sign Up</button></a>
+    </div>
+
+
+    </div> <!-- /container -->
+{% endblock %}

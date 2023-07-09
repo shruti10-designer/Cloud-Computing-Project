@@ -1,0 +1,10 @@
+runtime: python39
+automatic_scaling:
+  min_instances: 0
+  max_instances: 1
+env_variables:
+  REGION: asia-south1
+  GAE_INSTANCE_CLASS: F1
+network:
+  forwarded_ports:
+    - 8080

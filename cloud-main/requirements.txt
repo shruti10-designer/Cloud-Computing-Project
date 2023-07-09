@@ -1,0 +1,31 @@
+scikit-learn==1.0.1
+tqdm==4.62.3
+typing_extensions==4.5.0
+requests==2.26.0
+requests-oauthlib==1.3.0
+requests-toolbelt==0.9.1
+gunicorn==19.7.1
+Flask==2.2.2
+Flask-Security==3.0.0
+Flask-SQLAlchemy==2.5.1
+Flask-WTF==1.0.0
+Flask-Cors==3.0.10
+Flask-Bootstrap==3.3.7.1
+SQLAlchemy==1.4.29
+Flask-Caching==2.0.1
+Jinja2==3.0.3
+python-dotenv==0.19.1
+openai==0.27.0
+pandas
+Werkzeug
+
+# Mail requirements:
+bs4==0.0.1
+email_validator
+
+# Cam requirements:
+opencv-python==4.7.0.72
+torch
+torchvision
+transformers
+# tensorrt

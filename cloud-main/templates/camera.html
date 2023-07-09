@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Camera</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/cam.css') }}">
+</head>
+<body>
+	<h4 style="position: fixed; top:0; right:0 !important; margin: 2%">
+
+		Hi {{name}}
+ 
+	   </h4>
+	<h1>Camera</h1>
+	<button onclick="startCamera()">Open Camera</button>
+	<video id="video"></video>
+	<button id="switch-camera" onclick="toggleCamera()">Switch Camera</button>
+	<canvas id="canvas"></canvas>
+	<button id="capture" onclick="capture()">Capture</button>
+	<img id="preview">
+	<form id="preview-form" method="post" action="{{ url_for('preview') }}">
+		<input type="hidden" id="img-data" name="img-data">
+	</form>
+    <script src="{{ url_for('static', filename='js/cam.js') }}"></script>
+</body>
+</html>
